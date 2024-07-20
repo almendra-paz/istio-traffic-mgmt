@@ -20,3 +20,13 @@ Instalación:
 ✔ Installation complete  
 
 >> kubectl label namespace default istio-injection=enabled
+
+Tools: 
+
+>> kubectl run mycurlpod --image=badouralix/curl-jq:latest -i --tty -- sh
+
+Comandos útiles:
+
+>> x=1; while  [ $x -le 6 ]; do curl -s http://customers.default.svc | jq .'[0]'; $(( x++ )); done
+
+
