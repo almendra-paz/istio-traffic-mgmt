@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: customers
+spec:
+  hosts:
+    - customers.default.svc.cluster.local
+  http:
+    - route:
+        - destination:
+            host: customers.default.svc.cluster.local
+            subset: v1
+          weight: 100
+      mirror:
+        host: customers.default.svc.cluster.local
+        subset: v2
+      mirrorPercentage:
+        value: 100.0
