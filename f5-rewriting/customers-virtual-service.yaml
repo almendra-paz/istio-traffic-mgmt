@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: customers-route
+spec:
+  hosts:
+    - customers.default.svc.cluster.local
+  http:
+    - match:
+        - uri:
+            prefix: /hello
+      rewrite:
+        uri: /v1/hello
+      route:
+        - destination:
+            host: hello-world.default.svc.cluster.local
+    - route:
+        - destination:
+            host: customers.default.svc.cluster.local
+            subset: v1
